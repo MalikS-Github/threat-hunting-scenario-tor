@@ -114,72 +114,52 @@ DeviceNetworkEvents
 ## Chronological Event Timeline 
 
 
-1. File Download - TOR Installer
+# Threat Hunt Report: Unauthorized TOR Browser Usage
 
-Timestamp: 2026-04-12T19:38:03.8380496Z
+## Executive Summary
+On April 12, 2026, a threat hunt was conducted on device **malik-vm-threat** following alerts for suspicious network activity. The investigation confirmed that the user **malik** downloaded, installed, and utilized the TOR Browser to establish an anonymized connection to external relay nodes. During this session, the user created a document titled `tor-shopping-list.txt` on the desktop, suggesting intentional use of the software for specific tasks.
 
-Event: The user "malik" downloaded the file tor-browser-windows-x86_64-portable-15.0.9.exe to the Downloads folder.
+---
 
-Action: File download (renamed from temporary download string) detected.
+## Detailed Timeline of Events
 
-File Path: C:\Users\malik\Downloads\tor-browser-windows-x86_64-portable-15.0.9.exe
+### 1. File Download - TOR Installer
+* **Timestamp:** `2026-04-12T19:38:03.8380496Z`
+* **Event:** The user "malik" downloaded the file `tor-browser-windows-x86_64-portable-15.0.9.exe` to the Downloads folder.
+* **Action:** File download detected.
+* **File Path:** `C:\Users\malik\Downloads\tor-browser-windows-x86_64-portable-15.0.9.exe`
 
-2. Process Execution - TOR Browser Installation
+### 2. Process Execution - TOR Browser Installation
+* **Timestamp:** `2026-04-12T19:39:51.4484567Z`
+* **Event:** The user "malik" executed the file `tor-browser-windows-x86_64-portable-15.0.9.exe` in silent mode, initiating a background extraction and setup of the TOR Browser.
+* **Action:** Process creation detected.
+* **Command:** `tor-browser-windows-x86_64-portable-15.0.9.exe /S`
+* **File Path:** `C:\Users\malik\Downloads\tor-browser-windows-x86_64-portable-15.0.9.exe`
 
-Timestamp: 2026-04-12T19:39:51.4484567Z
+### 3. Process Execution - TOR Browser Launch
+* **Timestamp:** `2026-04-12T19:40:10.6357935Z`
+* **Event:** User "malik" opened the TOR browser. Subsequent processes associated with TOR browser, such as `firefox.exe` and `tor.exe`, were also created, indicating that the browser launched successfully.
+* **Action:** Process creation of TOR browser-related executables detected.
+* **File Path:** `C:\Users\malik\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe`
 
-Event: The user "malik" executed the portable installer in silent mode, initiating the automated extraction/installation of the TOR Browser files to the desktop.
+### 4. Network Connection - TOR Network
+* **Timestamp:** `2026-04-12T19:40:31.1246358Z`
+* **Event:** A network connection to IP `195.218.16.136` on port `9001` by user "malik" was established using `tor.exe`, confirming TOR browser network activity.
+* **Action:** Connection success.
+* **Process:** `tor.exe`
+* **File Path:** `C:\Users\malik\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe`
 
-Action: Process creation detected.
+### 5. Additional Network Connections - TOR Browser Activity
+* **Timestamps:** * `2026-04-12T19:40:34Z` - Connected to external IP on port `443`.
+    * `2026-04-12T19:40:36Z` - Local connection to `127.0.0.1` on port `9150`.
+* **Event:** Additional TOR network connections were established, indicating ongoing activity by user "malik" through the TOR browser.
+* **Action:** Multiple successful connections detected.
 
-Command: tor-browser-windows-x86_64-portable-15.0.9.exe /S
-
-File Path: C:\Users\malik\Downloads\tor-browser-windows-x86_64-portable-15.0.9.exe
-
-3. Process Execution - TOR Browser Launch
-
-Timestamp: 2026-04-12T19:40:10.6357935Z
-
-Event: User "malik" opened the TOR browser. This triggered the creation of the parent firefox.exe process and the essential tor.exe backend process.
-
-Action: Process creation of TOR browser-related executables detected.
-
-File Path: C:\Users\malik\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe
-
-4. Network Connection - TOR Network Establishment
-
-Timestamp: 2026-04-12T19:40:31.1246358Z
-
-Event: A network connection to an external relay at IP 195.218.16.136 on port 9001 was established by the process tor.exe, confirming the browser successfully joined the Tor circuit.
-
-Action: Connection success.
-
-Process: tor.exe
-
-File Path: C:\Users\malik\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe
-
-5. Additional Network Connections - TOR Browser Activity
-
-Timestamps:
-
-2026-04-12T19:40:34Z - Connection success to external IP over port 443.
-
-2026-04-12T19:40:36Z - Multiple local loopback connections to 127.0.0.1 on port 9150 (proxy port).
-
-Event: Additional encrypted traffic and local proxy communications were established, indicating active and ongoing browsing activity through the TOR network.
-
-Action: Multiple successful connections detected.
-
-6. File Creation - TOR Shopping List
-
-Timestamp: 2026-04-12T19:48:06.7259964Z
-
-Event: While the TOR session was active or recently concluded, the user "malik" created a file named tor-shopping-list.txt, initially in the Documents folder before it appeared on the Desktop.
-
-Action: File creation and subsequent move/rename detected.
-
-File Path: C:\Users\malik\Desktop\tor-shopping-list.txt
-
+### 6. File Creation - TOR Shopping List
+* **Timestamp:** `2026-04-12T19:48:06.7259964Z`
+* **Event:** The user "malik" created a file named `tor-shopping-list.txt` on the desktop, potentially indicating a list or notes related to their TOR browser activities.
+* **Action:** File creation detected.
+* **File Path:** `C:\Users\malik\Desktop\tor-shopping-list.txt`
 
 ---
 
